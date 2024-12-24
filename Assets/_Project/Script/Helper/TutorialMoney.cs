@@ -22,7 +22,7 @@ public class TutorialMoney : MonoBehaviour
                 money[i].SetActive(false);
             }
 
-            Controller.instance.currencyController.AddMoney(10000);
+            Controller.instance.currencyController.AddMoney(5000);
             Controller.instance.uiController.UpdateMoneyTexts();
             Destroy(gameObject);
         }

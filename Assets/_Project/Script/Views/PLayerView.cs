@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using Lean.Pool;
 using System.Diagnostics.Contracts;
+using System;
 
 public class PLayerView : MonoBehaviour
 {
@@ -57,9 +58,10 @@ public class PLayerView : MonoBehaviour
     bool fabricDropTriggerFlag1 = false;
     bool fabricDropTriggerFlag2 = false;
     bool fabricDropTriggerFlag3 = false;
+    bool fabricRecycleTriggerFlag = false;
     private void OnTriggerEnter(Collider other) 
     {
-        if(other.gameObject.CompareTag("1stFoodPickupPlace"))
+        if(other.CompareTag("1stFoodPickupPlace"))
         {
             onCurt1 = true;
             onCurt = true;
@@ -72,7 +74,7 @@ public class PLayerView : MonoBehaviour
 
             MoveShirtsToHand();
         }
-        else if(other.gameObject.CompareTag("2ndFoodPickupPlace"))
+        else if(other.CompareTag("2ndFoodPickupPlace"))
         {
             onCurt2 = true;
             onCurt = true;
@@ -85,7 +87,7 @@ public class PLayerView : MonoBehaviour
 
             MoveJeansToHand();
         }
-        else if(other.gameObject.CompareTag("3rdFoodPickupPlace"))
+        else if(other.CompareTag("3rdFoodPickupPlace"))
         {
             onCurt3 = true;
             onCurt = true;
@@ -98,7 +100,7 @@ public class PLayerView : MonoBehaviour
 
             MoveFrocksToHand();
         }
-        else if (other.gameObject.CompareTag("FabricPickupPlace"))
+        else if (other.CompareTag("FabricPickupPlace"))
         {
             onCurt4 = true;
             onCurt = true;
@@ -108,6 +110,19 @@ public class PLayerView : MonoBehaviour
             if (secondFoodOnhand > 0) return;
             if (thirdFoodOnhand > 0) return;
             MoveFabricToHand();
+        }
+        else if (other.CompareTag("FabricRecyclePlace"))
+        {
+            if (fabricRecycleTriggerFlag) return;
+
+            if (!GlobalData.instance.isFoodOnHand) return;
+            if (firstFoodOnhand > 0) return;
+            if (secondFoodOnhand > 0) return;
+            if (thirdFoodOnhand > 0) return;
+            if (fabricOnHand <= 0) return;
+
+            fabricRecycleTriggerFlag = true;
+            MoveFabricToRecycler();
         }
 
         if (other.CompareTag("1stFoodFabricDropPlace"))
@@ -386,6 +401,10 @@ public class PLayerView : MonoBehaviour
         {
             fabricDropTriggerFlag3 = false;
         }
+        else if (other.CompareTag("FabricRecyclePlace"))
+        {
+            fabricRecycleTriggerFlag = false;
+        }
         
         if (other.gameObject.CompareTag("BoxCollectPoint"))
         {
@@ -520,22 +539,57 @@ public class PLayerView : MonoBehaviour
         if (fabricOnHand == maxFoodOnHand) return;
 
         //InvokeRepeating(nameof(ShowFabricOnHand), 0f, 0.2f);
+        GlobalData.instance.isFoodOnHand = true;
         StartCoroutine(ShowFabricOnHand());
+        GlobalData.instance.isHandFull = true;
     }
 
     IEnumerator ShowFabricOnHand()
     {
         if (fabricOnHand >= maxFoodOnHand) yield break;
 
-        GlobalData.instance.isFoodOnHand = true;
-
         while (fabricOnHand < maxFoodOnHand)
         {
-            fabricDummys[fabricOnHand].enabled = true;
-            fabricOnHand++;
+            try
+            {
+                fabricDummys[fabricOnHand].enabled = true;
+                fabricOnHand++;
+
+                Controller.instance.currencyController.CutMoney(10); //each fabric piece costs 10 units of money
+
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Debug.LogError(ex);
+            }
+            
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    void MoveFabricToRecycler()
+    {
+        StartCoroutine(UnshowFabricOnHand());
+    }
+
+    IEnumerator UnshowFabricOnHand()
+    {
+        while (fabricOnHand > 0)
+        {
+            fabricDummys[fabricOnHand].enabled = false;
+            fabricOnHand--;
+
+            Controller.instance.currencyController.AddMoney(10); //refund money per fabric piece
 
             yield return new WaitForSeconds(0.1f);
         }
+
+        GlobalData.instance.isHandFull = false;
+
+        //do this procedure separately for last index
+        fabricDummys[fabricOnHand].enabled = false;
+
+        GlobalData.instance.isFoodOnHand = false;
     }
 
     //void ShowFabricOnHand()
@@ -571,9 +625,10 @@ public class PLayerView : MonoBehaviour
             }
         }
 
-        if (fabricOnHand == 0)
+        if (fabricOnHand <= 0)
         {
             GlobalData.instance.isFoodOnHand = false;
+            GlobalData.instance.isHandFull = false;
         }
 
         if (!CoockerView.instance.isShirtSewing)
@@ -604,6 +659,7 @@ public class PLayerView : MonoBehaviour
         if (fabricOnHand == 0)
         {
             GlobalData.instance.isFoodOnHand = false;
+            GlobalData.instance.isHandFull = false;
         }
 
         if (!CoockerView.instance.isJeansSewing)
@@ -634,6 +690,7 @@ public class PLayerView : MonoBehaviour
         if (fabricOnHand == 0)
         {
             GlobalData.instance.isFoodOnHand = false;
+            GlobalData.instance.isHandFull = false;
         }
 
         if (!CoockerView.instance.isFrocksSewing)

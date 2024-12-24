@@ -735,9 +735,6 @@ public class WaiterView : MonoBehaviour
                 {
                     randomSelect = 0;
                 }
-
-                //randomSelect = PickRandomNumber(new int[] { 0, 5, 2, 3}); //need to implement logic to check which tables are unlocked and only allow those tables to be passed here
-                Debug.Log("MoveToTable" + randomSelect);
             }
             else if (foodNo == 1) //jeans
             {
