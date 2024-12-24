@@ -629,6 +629,7 @@ public class PLayerView : MonoBehaviour
         {
             GlobalData.instance.isFoodOnHand = false;
             GlobalData.instance.isHandFull = false;
+            fabricOnHand = 0; //ensure index ends up at zero (is falling to -2 for some reason(prolly cuz of more than 1 call when entering collider (will use flag to adjust later)) so this ensures it resets to zero)
         }
 
         if (!CoockerView.instance.isShirtSewing)
