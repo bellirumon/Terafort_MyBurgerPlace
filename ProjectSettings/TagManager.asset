@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - FoodCover
+  - 1stFoodStack
+  - Table1
+  - Table2
+  - Money
+  - Table3
+  - Table4
+  - Customer
+  - DestroyPos
+  - BoxCollectPoint
+  - Scotty
+  - ScottyMoney
+  - WaiterBurgerPoint
+  - WaiterCokePoint
+  - WaiterFriesPoint
+  - WaiterTable1Point
+  - WaiterTable2Point
+  - WaiterTable3Point
+  - WaiterTable4Point
+  - Coliders
+  - WaiterPannelTrigger
+  - PlayerPannelTrigger
+  - WaiterDeliverTablePoint
+  - SpecialTableMoney
+  - WaiterDeliverTablePoint2
+  - Table5
+  - Table6
+  - Table7
+  - WaiterTable5Point
+  - WaiterTable6Point
+  - WaiterTable7Point
+  - Table8
+  - WaiterTable8Point
+  - 1stFoodPickupPlace
+  - 2ndFoodPickupPlace
+  - 3rdFoodPickupPlace
+  - FabricPickupPlace
+  - 1stFoodFabricDropPlace
+  - 2ndFoodFabricDropPlace
+  - 3rdFoodFabricDropPlace
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Table
+  - Money
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
