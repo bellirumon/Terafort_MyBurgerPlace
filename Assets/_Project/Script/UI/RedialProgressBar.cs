@@ -347,13 +347,13 @@ public class RedialProgressBar : MonoBehaviour
         {
             AllLockAndUnlockView.instance.UnlockTable3();
             AllLockAndUnlockView.instance.table4UnlockPoint.SetActive(true);
-            Controller.instance.tableController.DisableTable3Collider();
+            //Controller.instance.tableController.DisableTable3Collider();
             LeanPool.Spawn(effect, AllLockAndUnlockView.instance.table4UnlockPoint.transform.position, effect.transform.rotation);
         }
         if (table4)
         {
             AllLockAndUnlockView.instance.UnlockTable4();
-            Controller.instance.tableController.DisableTable4Collider();
+            //Controller.instance.tableController.DisableTable4Collider();
         }
         if (table5)
         {

@@ -60,9 +60,7 @@ public class CustomerView : MonoBehaviour
                 if (other.gameObject.GetComponent<TableView>().customerCount == 1) //if single person table, set orderNumber according to table tag
                 {
                     agent.enabled = false;
-                    //if (orderNumber == 0) { food1Image.SetActive(true); }
-                    //if (orderNumber == 1) { food2Image.SetActive(true); }
-                    //if (orderNumber == 2) { food3Image.SetActive(true); }
+
                     if (targetTable.CompareTag("Table1")) { orderNumber = 0; food1Image.SetActive(true); } //if table 1, order shirts
                     else if (targetTable.CompareTag("Table2")) { orderNumber = 1; food2Image.SetActive(true); } //if table 2, order jeans and so on
                     else if (targetTable.CompareTag("Table6")) { orderNumber = 0; food1Image.SetActive(true); }
@@ -87,7 +85,7 @@ public class CustomerView : MonoBehaviour
                     }
 
                     transform.position = other.gameObject.GetComponent<TableView>().customerSitPos.position;
-                    transform.rotation = other.gameObject.GetComponent<TableView>().customerSitPos.localRotation;
+                    transform.rotation = other.gameObject.GetComponent<TableView>().customerSitPos.rotation;
                     StartCoroutine(SitOnTable());
                 }
                 if(other.gameObject.GetComponent<TableView>().customerCount > 1)
