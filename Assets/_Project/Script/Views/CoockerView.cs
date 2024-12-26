@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using Lean.Pool;
 using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 public class CoockerView : MonoBehaviour
 {
@@ -43,6 +44,8 @@ public class CoockerView : MonoBehaviour
     public GameObject[] thirdFoodFabricDummys;
     [Space]
     public GameObject fabricPrefab;
+    public GameObject[] moneyDeductedFromFabricGen;
+    public GameObject[] moneyRefundedFromFabricRecycle;
 
     public bool isShirtSewing, isJeansSewing, isFrocksSewing;
 

@@ -556,7 +556,7 @@ public class PLayerView : MonoBehaviour
                 fabricOnHand++;
 
                 Controller.instance.currencyController.CutMoney(10); //each fabric piece costs 10 units of money
-
+                CoockerView.instance.moneyDeductedFromFabricGen[fabricOnHand].SetActive(true);
             }
             catch (IndexOutOfRangeException ex)
             {
@@ -580,6 +580,7 @@ public class PLayerView : MonoBehaviour
             fabricOnHand--;
 
             Controller.instance.currencyController.AddMoney(10); //refund money per fabric piece
+            CoockerView.instance.moneyRefundedFromFabricRecycle[fabricOnHand].SetActive(true);
 
             yield return new WaitForSeconds(0.1f);
         }
