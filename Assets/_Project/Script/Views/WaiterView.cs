@@ -636,7 +636,6 @@ public class WaiterView : MonoBehaviour
 
         if (AllLockAndUnlockView.instance.IsDeliverLandUnlocked())
         {
-
             if (AllLockAndUnlockView.instance.IsPackTable2Unlocked()) //if both delivery tables unlocked
             {
                 bothDeliveryTablesUnlocked = true;
@@ -654,7 +653,7 @@ public class WaiterView : MonoBehaviour
         }
 
 
-        if (moveToSimpleTableOrDeliveryTable == 0) //move to either delivery table
+        if (moveToSimpleTableOrDeliveryTable == 0) //move to delivery table
         {
             int deliveryTable1or2;
             if (bothDeliveryTablesUnlocked)
@@ -670,18 +669,8 @@ public class WaiterView : MonoBehaviour
             {
                 randomSelect = 8;
 
-                PackagingView packagingView = AllLockAndUnlockView.instance.packingTable1.GetComponent<PackagingView>();
-                //if (AllLockAndUnlockView.instance.IsDeliverLandUnlocked())
-                //{
-                //    agent.SetDestination(tablePoints[randomSelect].position);
-                //    isDeliveryTable1 = true;
-                //    return;
-                //}
-                //else
-                //{
-                //    MoveToTable(foodNo);
-                //    return;
-                //}
+                //PackagingView packagingView = AllLockAndUnlockView.instance.packingTable1.GetComponent<PackagingView>();
+
                 agent.SetDestination(tablePoints[randomSelect].position);
                 isDeliveryTable1 = true;
                 return;
@@ -690,18 +679,8 @@ public class WaiterView : MonoBehaviour
             {
                 randomSelect = 9;
 
-                PackagingView packagingView = AllLockAndUnlockView.instance.packingTable2.GetComponent<PackagingView>();
-                //if (AllLockAndUnlockView.instance.IsPackTable2Unlocked())
-                //{
-                //    agent.SetDestination(tablePoints[randomSelect].position);
-                //    isDeliveryTable2 = true;
-                //    return;
-                //}
-                //else
-                //{
-                //    MoveToTable(foodNo);
-                //    return;
-                //}
+                //PackagingView packagingView = AllLockAndUnlockView.instance.packingTable2.GetComponent<PackagingView>();
+
                 agent.SetDestination(tablePoints[randomSelect].position);
                 isDeliveryTable2 = true;
                 return;
@@ -713,41 +692,85 @@ public class WaiterView : MonoBehaviour
 
             if (foodNo == 0) //shirts
             {
-                if (AllLockAndUnlockView.instance.IsTable6Unlocked())
+                //table 1 is always unlocked
+
+                if (AllLockAndUnlockView.instance.IsTable4Unlocked()) //if 4 is unlocked, all else will be unlocked as well
                 {
-                    if (AllLockAndUnlockView.instance.IsTable3Unlocked())
-                    {
-                        if (AllLockAndUnlockView.instance.IsTable4Unlocked())
-                        {
-                            randomSelect = PickRandomNumber(new int[] { 0, 5, 2, 3 });
-                        }
-                        else
-                        {
-                            randomSelect = PickRandomNumber(new int[] { 0, 5, 2});
-                        }
-                    }
-                    else
-                    {
-                        randomSelect = Random.Range(0, 2) * 5;
-                    }
+                    randomSelect = PickRandomNumber(new int[] { 0, 5, 2, 3 });
                 }
                 else
                 {
-                    randomSelect = 0;
+                    if (AllLockAndUnlockView.instance.IsTable3Unlocked()) //if 3 is unlocked, all except 4 will already be unlocked 
+                    {
+                        randomSelect = PickRandomNumber(new int[] { 0, 5, 2});
+                    }
+                    else
+                    {
+                        if (AllLockAndUnlockView.instance.IsTable6Unlocked()) //if 6 unlocked, then table1 is definitely unlocked
+                        {
+                            randomSelect = Random.Range(0, 2) * 5;
+                        }
+                        else
+                        {
+                            randomSelect = 0;
+                        }
+                    }
                 }
             }
             else if (foodNo == 1) //jeans
             {
-                randomSelect = PickRandomNumber(new int[] { 1, 6, 2, 3 });
+                if (AllLockAndUnlockView.instance.IsTable4Unlocked()) //if 4 is unlocked, all else will be unlocked as well
+                {
+                    randomSelect = PickRandomNumber(new int[] { 1, 6, 2, 3 });
+                }
+                else
+                {
+                    if (AllLockAndUnlockView.instance.IsTable3Unlocked()) //if 3 is unlocked, all except 4 will already be unlocked 
+                    {
+                        randomSelect = PickRandomNumber(new int[] { 1, 6, 2 });
+                    }
+                    else
+                    {
+                        if (AllLockAndUnlockView.instance.IsTable7Unlocked()) //if 7 unlocked, then table2 is definitely unlocked
+                        {
+                            randomSelect = Random.Range(0, 2) * 6;
+                        }
+                        else
+                        {
+                            randomSelect = 1;
+                        }
+                    }
+                }
             }
             else if (foodNo == 2) //frocks
             {
-                randomSelect = PickRandomNumber(new int[] { 4, 7, 2, 3 });
+                if (AllLockAndUnlockView.instance.IsTable4Unlocked()) //if 4 is unlocked, all else will be unlocked as well
+                {
+                    randomSelect = PickRandomNumber(new int[] { 4, 7, 2, 3 });
+                }
+                else
+                {
+                    if (AllLockAndUnlockView.instance.IsTable3Unlocked()) //if 3 is unlocked, all except 4 will already be unlocked 
+                    {
+                        randomSelect = PickRandomNumber(new int[] { 4, 7, 2 });
+                    }
+                    else
+                    {
+                        if (AllLockAndUnlockView.instance.IsTable8Unlocked()) //if 8 unlocked, then table5 is definitely unlocked
+                        {
+                            randomSelect = (Random.Range(0, 2) * 3) + 4;
+                        }
+                        else
+                        {
+                            randomSelect = 4;
+                        }
+                    }
+                }
             }
         }
 
 
-        int PickRandomNumber(int[] possibleNums)
+        static int PickRandomNumber(int[] possibleNums)
         {
             int selectedIndex = Random.Range(0, possibleNums.Length);
             return possibleNums[selectedIndex];
@@ -799,44 +822,86 @@ public class WaiterView : MonoBehaviour
         agent.enabled = true;
         animator.SetInteger("Base", (int)State.walkWithBox);
 
-        int randomSelect = Random.Range(0, 8);
+        int randomSelect = 0;
 
         //only allows those indexes to be passed whose corresponding tables are already unlocked
 
         if (foodNo == 0) //shirts
         {
-            if (AllLockAndUnlockView.instance.IsTable6Unlocked())
+            //table 1 is always unlocked
+
+            if (AllLockAndUnlockView.instance.IsTable4Unlocked()) //if 4 is unlocked, all else will be unlocked as well
             {
-                if (AllLockAndUnlockView.instance.IsTable3Unlocked())
-                {
-                    if (AllLockAndUnlockView.instance.IsTable4Unlocked())
-                    {
-                        randomSelect = PickRandomNumber(new int[] { 0, 5, 2, 3 });
-                    }
-                    else
-                    {
-                        randomSelect = PickRandomNumber(new int[] { 0, 5, 2 });
-                    }
-                }
-                else
-                {
-                    randomSelect = Random.Range(0, 2) * 5;
-                }
+                randomSelect = PickRandomNumber(new int[] { 0, 5, 2, 3 });
             }
             else
             {
-                randomSelect = 0;
+                if (AllLockAndUnlockView.instance.IsTable3Unlocked()) //if 3 is unlocked, all except 4 will already be unlocked 
+                {
+                    randomSelect = PickRandomNumber(new int[] { 0, 5, 2 });
+                }
+                else
+                {
+                    if (AllLockAndUnlockView.instance.IsTable6Unlocked()) //if 6 unlocked, then table1 is definitely unlocked
+                    {
+                        randomSelect = Random.Range(0, 2) * 5;
+                    }
+                    else
+                    {
+                        randomSelect = 0;
+                    }
+                }
             }
-            //randomSelect = PickRandomNumber(new int[] { 0, 5, 2, 3 }); //need to implement logic to check which tables are unlocked and only allow those tables to be passed here
-            Debug.Log("MoveToTable O N L Y" + randomSelect);
         }
         else if (foodNo == 1) //jeans
         {
-            randomSelect = PickRandomNumber(new int[] { 1, 6, 2, 3 });
+            if (AllLockAndUnlockView.instance.IsTable4Unlocked()) //if 4 is unlocked, all else will be unlocked as well
+            {
+                randomSelect = PickRandomNumber(new int[] { 1, 6, 2, 3 });
+            }
+            else
+            {
+                if (AllLockAndUnlockView.instance.IsTable3Unlocked()) //if 3 is unlocked, all except 4 will already be unlocked 
+                {
+                    randomSelect = PickRandomNumber(new int[] { 1, 6, 2 });
+                }
+                else
+                {
+                    if (AllLockAndUnlockView.instance.IsTable7Unlocked()) //if 7 unlocked, then table2 is definitely unlocked
+                    {
+                        randomSelect = Random.Range(0, 2) * 6;
+                    }
+                    else
+                    {
+                        randomSelect = 1;
+                    }
+                }
+            }
         }
         else if (foodNo == 2) //frocks
         {
-            randomSelect = PickRandomNumber(new int[] { 4, 7, 2, 3 });
+            if (AllLockAndUnlockView.instance.IsTable4Unlocked()) //if 4 is unlocked, all else will be unlocked as well
+            {
+                randomSelect = PickRandomNumber(new int[] { 4, 7, 2, 3 });
+            }
+            else
+            {
+                if (AllLockAndUnlockView.instance.IsTable3Unlocked()) //if 3 is unlocked, all except 4 will already be unlocked 
+                {
+                    randomSelect = PickRandomNumber(new int[] { 4, 7, 2 });
+                }
+                else
+                {
+                    if (AllLockAndUnlockView.instance.IsTable8Unlocked()) //if 8 unlocked, then table5 is definitely unlocked
+                    {
+                        randomSelect = (Random.Range(0, 2) * 3) + 4;
+                    }
+                    else
+                    {
+                        randomSelect = 4;
+                    }
+                }
+            }
         }
 
         int PickRandomNumber(int[] possibleNums)

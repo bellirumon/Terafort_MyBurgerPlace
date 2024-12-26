@@ -124,16 +124,16 @@ public class AllLockAndUnlockView : MonoBehaviour
         //if (IsTable7Unlocked() && !IsTable8Unlocked()) { table8UnlockPoint.SetActive(true); }
 
 
-        if (IsTable1Unlocked() && !IsNewLandUnlocked()) { newLandUnlockPoint.SetActive(true); }
-        if (IsNewLandUnlocked() && !IsTable6Unlocked()) { table6UnlockPoint.SetActive(true); }
+        if (IsTable1Unlocked() && !IsTable6Unlocked()) { table6UnlockPoint.SetActive(true); }
         if (IsTable6Unlocked() && !IsHRUnlocked()) { hrUnlockPoint.SetActive(true); }
         if (IsHRUnlocked() && !IsDeliverLandUnlocked()) { deliverLandUnlockPoint.SetActive(true); }
         if (IsDeliverLandUnlocked() && !IsFriesUnlocked()) { friesUnlockPoint.SetActive(true); }
         if (IsFriesUnlocked() && !IsTable2Unlocked()) { table2UnlockPoint.SetActive(true); }
         if (IsTable2Unlocked() && !IsUpgradeUnlocked()) { upgradeUnlockPoint.SetActive(true); }
-        if (IsUpgradeUnlocked() && !IsSpecialTableUnlocked()) { specialTableUnlockPoint.SetActive(true); }
-        if (IsSpecialTableUnlocked() && !IsTable7Unlocked()) { table7UnlockPoint.SetActive(true); }
-        if (IsTable7Unlocked() && !IsCokeUnlocked()) { cokeUnlockPoint.SetActive(true); }
+        if (IsUpgradeUnlocked() && !IsTable7Unlocked()) { table7UnlockPoint.SetActive(true); }
+        if (IsTable7Unlocked() && !IsNewLandUnlocked()) { newLandUnlockPoint.SetActive(true); }
+        if (IsNewLandUnlocked() && !IsSpecialTableUnlocked()) { specialTableUnlockPoint.SetActive(true); }
+        if (IsSpecialTableUnlocked() && !IsCokeUnlocked()) { cokeUnlockPoint.SetActive(true); }
         if (IsCokeUnlocked() && !IsTable5Unlocked()) { table5UnlockPoint.SetActive(true); }
         if (IsTable5Unlocked() && !IsTable8Unlocked()) { table8UnlockPoint.SetActive(true); }
         if (IsTable8Unlocked() && !IsTable3Unlocked()) { table3UnlockPoint.SetActive(true); }
@@ -142,179 +142,179 @@ public class AllLockAndUnlockView : MonoBehaviour
     }
     public bool IsBurgerUnlocked()
     {
-        if (PlayerPrefs.GetString("BurgerUnlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("BurgerUnlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockBurger()
     {
-        PlayerPrefs.SetString("BurgerUnlocked", "true");
+        PlayerPrefs.SetInt("BurgerUnlocked", 1);
     }
 
 
     public bool IsFriesUnlocked()
     {
-        if (PlayerPrefs.GetString("FriesUnlocked") == "true") {return true;}
+        if (PlayerPrefs.GetInt("FriesUnlocked") == 1) {return true;}
         else { return false; }
     }
     public void UnlockFries()
     {
-        PlayerPrefs.SetString("FriesUnlocked", "true");
+        PlayerPrefs.SetInt("FriesUnlocked", 1);
     }
 
 
     public bool IsCokeUnlocked()
     {
-        if (PlayerPrefs.GetString("CokeUnlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("CokeUnlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockCoke()
     {
-        PlayerPrefs.SetString("CokeUnlocked", "true");
+        PlayerPrefs.SetInt("CokeUnlocked", 1);
     }
 
 
     public bool IsSpecialTableUnlocked()
     {
-        if (PlayerPrefs.GetString("SpecialTableUnlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("SpecialTableUnlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockSpecialTable()
     {
-        PlayerPrefs.SetString("SpecialTableUnlocked", "true");
+        PlayerPrefs.SetInt("SpecialTableUnlocked", 1);
     }
 
 
     public bool IsTable1Unlocked()
     {
-        if (PlayerPrefs.GetString("Table1Unlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("Table1Unlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockTable1()
     {
-        PlayerPrefs.SetString("Table1Unlocked", "true");
+        PlayerPrefs.SetInt("Table1Unlocked", 1);
     }
 
 
     public bool IsTable2Unlocked()
     {
-        if (PlayerPrefs.GetString("Table2Unlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("Table2Unlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockTable2()
     {
-        PlayerPrefs.SetString("Table2Unlocked", "true");
+        PlayerPrefs.SetInt("Table2Unlocked", 1);
     }
 
 
     public bool IsTable3Unlocked()
     {
-        if (PlayerPrefs.GetString("Table3Unlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("Table3Unlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockTable3()
     {
-        PlayerPrefs.SetString("Table3Unlocked", "true");
+        PlayerPrefs.SetInt("Table3Unlocked", 1);
     }
 
 
     public bool IsTable4Unlocked()
     {
-        if (PlayerPrefs.GetString("Table4Unlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("Table4Unlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockTable4()
     {
-        PlayerPrefs.SetString("Table4Unlocked", "true");
+        PlayerPrefs.SetInt("Table4Unlocked", 1);
     }
 
     public bool IsTable5Unlocked()
     {
-        if (PlayerPrefs.GetString("Table5Unlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("Table5Unlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockTable5()
     {
-        PlayerPrefs.SetString("Table5Unlocked", "true");
+        PlayerPrefs.SetInt("Table5Unlocked", 1);
     }
 
     public bool IsTable6Unlocked()
     {
-        if (PlayerPrefs.GetString("Table6Unlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("Table6Unlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockTable6()
     {
-        PlayerPrefs.SetString("Table6Unlocked", "true");
+        PlayerPrefs.SetInt("Table6Unlocked", 1);
     }
 
     public bool IsTable7Unlocked()
     {
-        if (PlayerPrefs.GetString("Table7Unlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("Table7Unlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockTable7()
     {
-        PlayerPrefs.SetString("Table7Unlocked", "true");
+        PlayerPrefs.SetInt("Table7Unlocked", 1);
     }
 
     public bool IsTable8Unlocked()
     {
-        if (PlayerPrefs.GetString("Table8Unlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("Table8Unlocked") == 1) { return true; }
         else { return false; }
     }
     public void UnlockTable8()
     {
-        PlayerPrefs.SetString("Table8Unlocked", "true");
+        PlayerPrefs.SetInt("Table8Unlocked", 1);
     }
 
 
     public bool IsHRUnlocked()
     {
-        if (PlayerPrefs.GetString("HRUnlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("HRUnlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockHR()
     {
-        PlayerPrefs.SetString("HRUnlocked", "true");
+        PlayerPrefs.SetInt("HRUnlocked", 1);
     }
 
 
     public bool IsUpgradeUnlocked()
     {
-        if (PlayerPrefs.GetString("UpgradeUnlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("UpgradeUnlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockUpgrade()
     {
-        PlayerPrefs.SetString("UpgradeUnlocked", "true");
+        PlayerPrefs.SetInt("UpgradeUnlocked", 1);
     }
 
 
     public bool IsDeliverLandUnlocked()
     {
-        if (PlayerPrefs.GetString("DeliverLandUnlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("DeliverLandUnlocked") == 1) { return true; }
         else{ return false; }
     }
     public bool IsPackTable2Unlocked()
     {
-        if (PlayerPrefs.GetString("DeliverTable2Unlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("DeliverTable2Unlocked") == 1) { return true; }
         else{ return false; }
     }
     public void UnlockPackTable2()
     {
-        PlayerPrefs.SetString("DeliverTable2Unlocked","true");
+        PlayerPrefs.SetInt("DeliverTable2Unlocked",1);
     }
     public void UnlockDeliverLand()
     {
-        PlayerPrefs.SetString("DeliverLandUnlocked", "true");
+        PlayerPrefs.SetInt("DeliverLandUnlocked", 1);
     }
     public void UnlockNewLand()
     {
-        PlayerPrefs.SetString("NewLandUnlocked", "true");
+        PlayerPrefs.SetInt("NewLandUnlocked", 1);
     }
     public bool IsNewLandUnlocked()
     {
-        if (PlayerPrefs.GetString("NewLandUnlocked") == "true") { return true; }
+        if (PlayerPrefs.GetInt("NewLandUnlocked") == 1) { return true; }
         else{ return false; } 
     }
 }

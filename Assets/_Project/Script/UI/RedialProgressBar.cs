@@ -275,8 +275,8 @@ public class RedialProgressBar : MonoBehaviour
             {
                 Controller.instance.customersController.waitingCustomers[i].GetComponent<CustomerView>().ResetOrders();
             }
-            AllLockAndUnlockView.instance.newLandUnlockPoint.SetActive(true);
-            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.newLandUnlockPoint.transform.position, effect.transform.rotation);
+            AllLockAndUnlockView.instance.table5UnlockPoint.SetActive(true);
+            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.table5UnlockPoint.transform.position, effect.transform.rotation);
         }
 
         if (deliverLand)
@@ -290,8 +290,8 @@ public class RedialProgressBar : MonoBehaviour
         {
             AllLockAndUnlockView.instance.UnlockNewLand();
             AllLockAndUnlockView.instance.newLandLocked.SetActive(false);
-            AllLockAndUnlockView.instance.table6UnlockPoint.SetActive(true);
-            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.table6UnlockPoint.transform.position, effect.transform.rotation);
+            AllLockAndUnlockView.instance.specialTableUnlockPoint.SetActive(true);
+            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.specialTableUnlockPoint.transform.position, effect.transform.rotation);
         }
         if (packtable2)
         {
@@ -308,15 +308,15 @@ public class RedialProgressBar : MonoBehaviour
         if (upgrade)
         {
             AllLockAndUnlockView.instance.UnlockUpgrade();
-            AllLockAndUnlockView.instance.specialTableUnlockPoint.SetActive(true);
-            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.specialTableUnlockPoint.transform.position, effect.transform.rotation);
+            AllLockAndUnlockView.instance.table7UnlockPoint.SetActive(true);
+            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.table7UnlockPoint.transform.position, effect.transform.rotation);
         }
 
         if (specialTable)
         {
             AllLockAndUnlockView.instance.UnlockSpecialTable();
-            AllLockAndUnlockView.instance.table7UnlockPoint.SetActive(true);
-            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.table7UnlockPoint.transform.position, effect.transform.rotation);
+            AllLockAndUnlockView.instance.cokeUnlockPoint.SetActive(true);
+            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.cokeUnlockPoint.transform.position, effect.transform.rotation);
         }
 
         if (table1)
@@ -332,8 +332,8 @@ public class RedialProgressBar : MonoBehaviour
 
             Controller.instance.cameraController.MoveCamera();
 
-            AllLockAndUnlockView.instance.newLandUnlockPoint.SetActive(true);
-            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.newLandUnlockPoint.transform.position, effect.transform.rotation);
+            AllLockAndUnlockView.instance.table6UnlockPoint.SetActive(true);
+            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.table6UnlockPoint.transform.position, effect.transform.rotation);
 
             Controller.instance.customersController.CallInstantiateCustomerAndWait();
         }
@@ -370,8 +370,8 @@ public class RedialProgressBar : MonoBehaviour
         if (table7)
         {
             AllLockAndUnlockView.instance.UnlockTable7();
-            AllLockAndUnlockView.instance.friesUnlockPoint.SetActive(true);
-            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.friesUnlockPoint.transform.position, effect.transform.rotation);
+            AllLockAndUnlockView.instance.newLandUnlockPoint.SetActive(true);
+            LeanPool.Spawn(effect, AllLockAndUnlockView.instance.newLandUnlockPoint.transform.position, effect.transform.rotation);
         }
         if (table8)
         {
