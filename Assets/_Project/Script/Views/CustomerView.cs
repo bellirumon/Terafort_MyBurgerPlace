@@ -105,7 +105,7 @@ public class CustomerView : MonoBehaviour
                         else if (orderNumber == 2) { food3Image.SetActive(true); }
 
                         transform.position = other.gameObject.GetComponent<TableView>().customerSitPos4.position;
-                        transform.rotation = other.gameObject.GetComponent<TableView>().customerSitPos4.localRotation;
+                        transform.rotation = other.gameObject.GetComponent<TableView>().customerSitPos4.rotation;
                         other.gameObject.GetComponent<TableView>().customersInTable++;
                         StartCoroutine(SitOnTable());
                     }
@@ -124,7 +124,7 @@ public class CustomerView : MonoBehaviour
                         else if (orderNumber == 2) { food3Image.SetActive(true); }
 
                         transform.position = other.gameObject.GetComponent<TableView>().customerSitPos3.position;
-                        transform.rotation = other.gameObject.GetComponent<TableView>().customerSitPos3.localRotation;
+                        transform.rotation = other.gameObject.GetComponent<TableView>().customerSitPos3.rotation;
                         other.gameObject.GetComponent<TableView>().customersInTable++;
                         StartCoroutine(SitOnTable());
                     }
@@ -143,7 +143,7 @@ public class CustomerView : MonoBehaviour
                         else if (orderNumber == 2) { food3Image.SetActive(true); }
 
                         transform.position = other.gameObject.GetComponent<TableView>().customerSitPos2.position;
-                        transform.rotation = other.gameObject.GetComponent<TableView>().customerSitPos2.localRotation;
+                        transform.rotation = other.gameObject.GetComponent<TableView>().customerSitPos2.rotation;
                         other.gameObject.GetComponent<TableView>().customersInTable++;
                         StartCoroutine(SitOnTable());
                     }
@@ -178,7 +178,7 @@ public class CustomerView : MonoBehaviour
                         }
 
                         transform.position = other.gameObject.GetComponent<TableView>().customerSitPos.position;
-                        transform.rotation = other.gameObject.GetComponent<TableView>().customerSitPos.localRotation;
+                        transform.rotation = other.gameObject.GetComponent<TableView>().customerSitPos.rotation;
                         other.gameObject.GetComponent<TableView>().customersInTable++;
                         StartCoroutine(SitOnTable());
                     }
