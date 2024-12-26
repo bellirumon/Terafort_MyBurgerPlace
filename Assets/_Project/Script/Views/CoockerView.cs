@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Lean.Pool;
+using UnityEngine.UI;
 
 public class CoockerView : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class CoockerView : MonoBehaviour
     public Transform thirdFoodInstancePos;
     public Transform fabricInstancePos;
     public GameObject firstFoodPrefab;
+    public Image shirtsStall_Timer;
+    [SerializeField] float shirtSewDuration = 1f;
     public int firstFoodStored;
     public int firstFoodMax;
     public GameObject[] firstFoodDummys;
@@ -20,6 +23,8 @@ public class CoockerView : MonoBehaviour
     public GameObject[] firstFoodFabricDummys;
     [Space]
     public GameObject secondFoodPrefab;
+    public Image jeansStall_Timer;
+    [SerializeField] float jeansSewDuration = 1.5f;
     public int secondFoodStored;
     public int secondFoodMax;
     public GameObject[] secondFoodDummys;
@@ -28,6 +33,8 @@ public class CoockerView : MonoBehaviour
     public GameObject[] secondFoodFabricDummys;
     [Space]
     public GameObject thirdFoodPrefab;
+    public Image frocksStall_Timer;
+    [SerializeField] float frockSewDuration = 2f;
     public int thirdFoodStored;
     public int thirdFoodMax;
     public GameObject[] thirdFoodDummys;
@@ -60,14 +67,24 @@ public class CoockerView : MonoBehaviour
         if(AllLockAndUnlockView.instance.IsCokeUnlocked()) { Invoke(nameof(SewFrocksAndStack), 1.8f); }
     }
 
+    void Update()
+    {
+        shirtsStall_Timer.transform.LookAt(Camera.main.transform);    
+        jeansStall_Timer.transform.LookAt(Camera.main.transform);    
+        frocksStall_Timer.transform.LookAt(Camera.main.transform);    
+    }
+
+
     public void SewShirtsAndStack()
     {
         if (firstFoodFabricStored <= 0 || firstFoodStored >= firstFoodMax) return;
 
         isShirtSewing = true;
-        GameObject firstFood = LeanPool.Spawn(firstFoodPrefab, firstFoodInstancePos.transform.position, firstFoodPrefab.transform.rotation);
+        GameObject firstFood = LeanPool.Spawn(firstFoodPrefab, firstFoodInstancePos.transform.position, firstFoodDummys[0].transform.rotation);
 
-        firstFood.transform.DOMove(firstFoodDummys[firstFoodStored].transform.position, 0.15f).SetEase(Ease.OutSine).OnComplete(() =>
+        StartCoroutine(AnimateShirtTimer(shirtSewDuration));
+
+        firstFood.transform.DOMove(firstFoodDummys[firstFoodStored].transform.position, shirtSewDuration).SetEase(Ease.OutSine).OnComplete(() =>
         {
             firstFoodFabricDummys[firstFoodFabricStored - 1].SetActive(false);
             firstFoodFabricStored--;
@@ -103,15 +120,31 @@ public class CoockerView : MonoBehaviour
         isShirtSewing = false;
     }
 
+    IEnumerator AnimateShirtTimer(float duration)
+    {
+        shirtsStall_Timer.fillAmount = 0f;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            shirtsStall_Timer.fillAmount += Mathf.Clamp01(elapsedTime / duration);
+            yield return null;
+        }
+
+        shirtsStall_Timer.fillAmount = 1f;
+    }
 
     public void SewJeansAndStack()
     {
         if (secondFoodFabricStored <= 0 || secondFoodStored >= secondFoodMax) return;
 
         isJeansSewing = true;
-        GameObject secondFood = LeanPool.Spawn(secondFoodPrefab, secondFoodInstancePos.transform.position, secondFoodPrefab.transform.rotation);
+        GameObject secondFood = LeanPool.Spawn(secondFoodPrefab, secondFoodInstancePos.transform.position, secondFoodDummys[0].transform.rotation);
 
-        secondFood.transform.DOMove(secondFoodDummys[secondFoodStored].transform.position, 0.15f).SetEase(Ease.OutSine).OnComplete(() =>
+        StartCoroutine(AnimateJeansTimer(jeansSewDuration));
+
+        secondFood.transform.DOMove(secondFoodDummys[secondFoodStored].transform.position, jeansSewDuration).SetEase(Ease.OutSine).OnComplete(() =>
         {
             secondFoodFabricDummys[secondFoodFabricStored - 1].SetActive(false);
             secondFoodFabricStored--;
@@ -144,15 +177,31 @@ public class CoockerView : MonoBehaviour
         CancelInvoke(nameof(SewJeansAndStack));
         isJeansSewing = false;
     }
+    IEnumerator AnimateJeansTimer(float duration)
+    {
+        jeansStall_Timer.fillAmount = 0f;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            jeansStall_Timer.fillAmount += Mathf.Clamp01(elapsedTime / duration);
+            yield return null;
+        }
+
+        jeansStall_Timer.fillAmount = 1f;
+    }
 
     public void SewFrocksAndStack()
     {
         if (thirdFoodFabricStored <= 0 || thirdFoodStored >= thirdFoodMax) return;
 
         isFrocksSewing = true;
-        GameObject thirdFood = LeanPool.Spawn(thirdFoodPrefab, thirdFoodInstancePos.transform.position, thirdFoodPrefab.transform.rotation);
+        GameObject thirdFood = LeanPool.Spawn(thirdFoodPrefab, thirdFoodInstancePos.transform.position, thirdFoodDummys[0].transform.rotation);
 
-        thirdFood.transform.DOMove(thirdFoodDummys[thirdFoodStored].transform.position, 0.15f).SetEase(Ease.OutSine).OnComplete(() =>
+        StartCoroutine(AnimateFrockTimer(frockSewDuration));
+
+        thirdFood.transform.DOMove(thirdFoodDummys[thirdFoodStored].transform.position, frockSewDuration).SetEase(Ease.OutSine).OnComplete(() =>
         {
             thirdFoodFabricDummys[thirdFoodFabricStored - 1].SetActive(false);
             thirdFoodFabricStored--;
@@ -186,6 +235,24 @@ public class CoockerView : MonoBehaviour
         CancelInvoke(nameof(SewFrocksAndStack));
         isFrocksSewing = false;
     }
+
+    IEnumerator AnimateFrockTimer(float duration)
+    {
+        frocksStall_Timer.fillAmount = 0f;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            frocksStall_Timer.fillAmount += Mathf.Clamp01(elapsedTime / duration);
+            yield return null;
+        }
+
+        frocksStall_Timer.fillAmount = 1f;
+    }
+
+
+
 
     public void MoveItemCall()
     {
@@ -235,19 +302,6 @@ public class CoockerView : MonoBehaviour
             GlobalData.instance.isFoodOnHand = true;
             food.AddComponent<MovingFoodDirect3>();
         }
-        //else if (PLayerView.instance.onCurt4)
-        //{
-        //    //gets called 22 times
-        //    if (PLayerView.instance.fabricOnHand >= PLayerView.instance.maxFoodOnHand)
-        //    {
-        //        return;
-        //    }
-        //    //StopCookingBurger();
-        //    GameObject food = LeanPool.Spawn(fabricPrefab, fabricInstancePos.transform.position, fabricPrefab.transform.rotation);
-
-        //    GlobalData.instance.isFoodOnHand = true;
-        //    food.AddComponent<MovingFoodDirect4>();
-        //}
     }
 
 }
