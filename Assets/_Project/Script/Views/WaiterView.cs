@@ -257,6 +257,9 @@ public class WaiterView : MonoBehaviour
         isDeliveryTable2 = false;
     }
 
+    static bool alreadyCalledFlag1 = false;
+    static bool alreadyCalledFlag2 = false;
+    static bool alreadyCalledFlag3 = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("WaiterBurgerPoint"))
