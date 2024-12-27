@@ -159,6 +159,7 @@ public class CoockerView : MonoBehaviour
         }
 
         shirtsStall_Timer.fillAmount = 1f;
+        shirtsStall_Timer.fillAmount = 0f;
     }
 
     public void SewJeansAndStack()
@@ -219,6 +220,7 @@ public class CoockerView : MonoBehaviour
         }
 
         jeansStall_Timer.fillAmount = 1f;
+        jeansStall_Timer.fillAmount = 0f;
     }
 
     public void SewFrocksAndStack()
@@ -281,8 +283,8 @@ public class CoockerView : MonoBehaviour
         }
 
         frocksStall_Timer.fillAmount = 1f;
+        frocksStall_Timer.fillAmount = 0f;
     }
-
 
 
 
